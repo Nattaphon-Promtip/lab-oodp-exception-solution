@@ -13,28 +13,32 @@ public class ArraysAndExceptions {
 	 */
 	public void start() {
 
-		int[] myArray = generateArray();
+    int[] myArray = generateArray();
 
-		int index = -1;
-		boolean needInput = true;
+    int index = -1;
+    boolean needInput = true;
 
-		while (needInput) {
-			// TODO: add try catch for handling InvalidIndexException, IndexTooLowException, and IndexTooHighException appropriately.
+    while (needInput) {
 
-			System.out.print("Enter an index:\n>> ");
-			String indexStr = Keyboard.readInput();
+        System.out.print("Enter an index:\n>> ");
+        String indexStr = Keyboard.readInput();
 
-			try {
-				index = getArrayIndex(indexStr);
-			} catch (InvalidIndexException | IndexTooHighException | IndexTooLowException e) {
-				
-				e.printStackTrace();
-			}
-			needInput = false;
+        try {
+            index = getArrayIndex(indexStr);
+            needInput = false;   // valid input → stop loop
+        } 
+        catch (InvalidIndexException e) {
+            System.out.println("Error: Invalid index!");
+        } 
+        catch (IndexTooLowException e) {
+            System.out.println("Error: Index too low!");
+        } 
+        catch (IndexTooHighException e) {
+            System.out.println("Error: Index too high!");
+        }
+    }
 
-		}
-
-		System.out.println("The element at index " + index + " is: " + myArray[index]);
+    System.out.println("The element at index " + index + " is: " + myArray[index]);
 	}
 
 	/**
